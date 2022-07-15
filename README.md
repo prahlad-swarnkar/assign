@@ -1,5 +1,5 @@
 # assign
-assignment repo
+Assignment repository
 
 install : npm install -g serve
 
