@@ -1,6 +1,6 @@
 # assign
 Assignment repository
 
-install : npm install -g serve
+npm install -g serve
 
-run : serve -s dist
+serve -s dist
