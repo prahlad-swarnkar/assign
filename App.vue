@@ -8,58 +8,60 @@
   </div>
 
   <!-- Data Division -->
-  <div class="main">
+  <div class='main'>
 
     <!-- New Task Division -->
-    <div class="data" style="background-color: white;">
+    <div class='data' style='background-color: white;'>
     <table><tr>
       <td>
-      <input type="text" v-model="newTask" 
-      @keyup.enter="addTask"
-      placeholder="Add a new task">
+      <input type='text' v-model='newTask' 
+      @keyup.enter='addTask'
+      placeholder='Add a new task'>
       </td>
       <td>
-      <button @click="addTask" id="ad"
-      :disabled="newTask.length < 1"> &#43
+      <button @click='addTask' id='ad'
+      :disabled='newTask.length < 1'> &#43
       </button>
       </td>
     </tr></table>
     </div>
 
     <!-- Task List Division -->
-    <div class="data" style="padding: 2%;">
+    <div class='data' style='padding: 2%;'>
     <table>
       <tr>
       <th>Tasks</th>
       <!-- Brief Info -->
-      <td class="opt">
-        <span style="color: #0073d6;">Total {{ allTasks }}
+      <td class='opt'>
+        <span style='color: #0073d6;'>Total {{ allTasks }}
         </span>
-        <span style="color: #d7514d;">
+        <span style='color: #d7514d;'>
           Remaining {{ remainTasks }}
         </span>
-        <span style="color: #5ab65a;">
+        <span style='color: #5ab65a;'>
         Completed {{ finishedTasks }}
         </span>
       </td>
       </tr>
 
     <!-- Task List -->
-      <tr v-for="(task,index) in latest" :key="task.id">
+      <tr v-for='(task,index) in latest' :key='task.id'>
         <!-- Task description -->
         <td>
-        <span v-if="task.finished" style="color: gray;">
+        <span v-if='task.finished' style='color: gray;'>
             {{ task.des }}
         </span>
-        <span v-else>{{ task.des }}</span>
+        <span v-else>
+            {{ task.des }}
+        </span>
         </td>
         <!-- Options -->
-        <td class="opt">
-          <span v-if="!task.finished">
-            <button @click="finishTask(task)"> &#10003 </button>
+        <td class='opt'>
+          <span v-if='!task.finished'>
+            <button @click='finishTask(task)'> &#10003 </button>
           </span>
-          <button @click="removeTask(task.id)"> &#128465 </button>
-          <button> &#9998 </button>
+          <button @click='removeTask(task.id)'> &#128465 </button>
+          <button @click='editTask(task)'> &#9998 </button>
         </td>
       </tr>
     </table>
@@ -77,11 +79,11 @@ export default {
       logoURL: 'https://images.unsplash.com/photo-1507925921958-8a62f3d1a50d?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1955&q=80',
       logoCaption: 'A photo by Kelly Sikkema on Unsplash showing post-it notes',
       tasks : [
-      { id: 1, des: "Make ToDo App", finished: true },
-      { id: 2, des: "Task @ : ???", finished: false },
-      { id: 3, des: "Guess Task 2", finished: false }
+      { id: 1, des: 'Make ToDo App', finished: true },
+      { id: 2, des: 'Task @ : ???', finished: false },
+      { id: 3, des: 'Guess Task 2', finished: false }
       ],
-      newTask: ''
+      newTask: '',
     }
   },
   methods: {
@@ -103,6 +105,10 @@ export default {
     },
     finishTask(t) {
       t.finished = true
+    },
+    editTask(t){
+      this.newTask = t.des 
+      this.removeTask(t.id)
     }
   },
   computed: {
