@@ -46,6 +46,9 @@
 
     <!-- Task List -->
       <tr v-for='(task,index) in latest' :key='task.id'>
+      <td colspan="2">
+      <table>
+        <tr>
         <!-- Task description -->
         <td>
         <span v-if='task.finished' style='color: gray;'>
@@ -56,13 +59,24 @@
         </span>
         </td>
         <!-- Options -->
-        <td class='opt'>
+        <td class='opt' style="width:25%">
           <span v-if='!task.finished'>
             <button @click='finishTask(task)'> &#10003 </button>
           </span>
           <button @click='removeTask(task.id)'> &#128465 </button>
           <button @click='editTask(task)'> &#9998 </button>
         </td>
+        </tr>
+      <tr><td colspan="2">
+          <div style="display: none;" :id="'E'+task.id" 
+          class="emenu"><table><tr><td>Description
+            <input type='text' v-model='task.des'></td>
+            <td>Finished<input type='checkbox' v-model='task.finished'></td>
+            <td> <button @click="Eclose(task)">
+            &#9650</button></td></tr></table></div>
+      </td></tr>
+      </table>
+      </td>
       </tr>
     </table>
 
@@ -107,8 +121,10 @@ export default {
       t.finished = true
     },
     editTask(t){
-      this.newTask = t.des 
-      this.removeTask(t.id)
+      document.getElementById("E"+t.id).style.display = "block"
+    },
+    Eclose(t) {
+      document.getElementById("E"+t.id).style.display = "none"
     }
   },
   computed: {
@@ -143,6 +159,17 @@ export default {
 .opt{
   text-align: right;
 }
+.emenu{
+  border-radius: 10px;
+  background-color: white;
+  width: 100%;
+  text-align: center;
+}
+.emenu td{
+  padding: 1%;
+  background-color: white;
+  vertical-align: top;
+}
 h1{
   font-size: xx-large;
   color: #c0a050;
@@ -150,7 +177,7 @@ h1{
 table{
   width: 100%;
   font-size: medium;
-  word-wrap: normal;
+  word-wrap: anywhere;
 }
 button{
   background: none;
