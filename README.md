@@ -1,11 +1,4 @@
-# assign
-Assignment repository
-
-----------------------
-
-Potion Master (A Game Concept and Story)
-
-----------------------
+# Todo App Using VueJS
 
 To run todo app install serve : npm install -g serve
 
